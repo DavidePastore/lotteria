@@ -85,7 +85,7 @@ public class Main {
 			//Normal numbers
 			number = PersonaUtils.numberPersonasWithNMatched(persona, i);
 			probabilita = (float) number*100/persona.length;
-			System.out.printf("Le persone che hanno indovinato %d numeri sono: %d (probabilità: %.4f%%).\n", i, number, probabilita);
+			System.out.printf("Le persone che hanno indovinato %d numeri sono: %d (probabilitÃ : %.4f%%).\n", i, number, probabilita);
 			if(number > 0 && i != 0){
 				//PersonaUtils.printPersonaWithNMatched(persona, i);
 			}
@@ -94,7 +94,7 @@ public class Main {
 			if(i > 0 && i < 6){
 				number = PersonaUtils.numberPersonasWithNMatchedAndJolly(persona, i, lotteria.getJolly());
 				probabilita = (float) number*100/persona.length;
-				System.out.printf("Le persone che hanno indovinato %d numeri con il jolly sono: %d (probabilità: %.4f%%).\n", i, number, probabilita);
+				System.out.printf("Le persone che hanno indovinato %d numeri con il jolly sono: %d (probabilitÃ : %.4f%%).\n", i, number, probabilita);
 				if(number > 0){
 					//PersonaUtils.printPersonaWithNMatchedAndJolly(persona, i, lotteria.getJolly());
 				}
