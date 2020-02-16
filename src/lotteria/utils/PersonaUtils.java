@@ -17,10 +17,12 @@ public class PersonaUtils {
 	/**
 	 * Print a persona.
 	 * @param persona the persona object you want to print.
+	 * @param nomeMaxSize The max size of the nome field.
+	 * @param cognomeMaxSize The max size of the cognome field.
 	 */
-	public static void printPersona(Persona persona){
+	public static void printPersona(Persona persona, int nomeMaxSize, int cognomeMaxSize){
 		String numeriGiocati = ArrayToString.shortArrayToString(persona.getNumeriGiocati());
-		System.out.printf("%-15.15s %-15.15s %-" + spacesNum + "."+spacesNum+"s\n" , persona.getNome(), persona.getCognome(), numeriGiocati);
+		System.out.printf("%-" + nomeMaxSize + "." + nomeMaxSize + "s %-" + cognomeMaxSize + "." + cognomeMaxSize + "s %-" + spacesNum + "." + spacesNum + "s\n" , persona.getNome(), persona.getCognome(), numeriGiocati);
 	}
 	
 	/**
@@ -28,21 +30,25 @@ public class PersonaUtils {
 	 * @param persone the persona array you want to print.
 	 */
 	public static void printPersonas(Persona[] persone){
+		int nomeMaxSize = calculateSizeOfNomeField(persone, -1, (short) -1);
+		int cognomeMaxSize = calculateSizeOfCognomeField(persone, -1, (short) -1);
 		for(int i=0; i < persone.length; i++){
-			printPersona(persone[i]);
+			printPersona(persone[i], nomeMaxSize, cognomeMaxSize);
 		}
 	}
 	
 	/**
 	 * Print a persona statistics.
 	 * @param persona the persona object you want to print.
+	 * @param nomeMaxSize The max size of the nome field.
+	 * @param cognomeMaxSize The max size of the cognome field.
 	 */
-	private static void printPersonaResult(Persona persona) {
+	private static void printPersonaResult(Persona persona, int nomeMaxSize, int cognomeMaxSize) {
 		String numeriGiocati;
 		String numeriIndovinati;
 		numeriGiocati = ArrayToString.shortArrayToString(persona.getNumeriGiocati());
 		numeriIndovinati = ArrayToString.shortArrayToString(persona.getNumeriIndovinati());
-		System.out.printf("%-15.15s %-15.15s %-" + spacesNum + "."+spacesNum+"s %-15.15b %-15.15s \n" , persona.getNome(), persona.getCognome(), numeriGiocati, persona.won(), numeriIndovinati);
+		System.out.printf("%-" + nomeMaxSize + "." + nomeMaxSize + "s %-" + cognomeMaxSize + "." + cognomeMaxSize + "s %-" + spacesNum + "." + spacesNum + "s %-15.15b %-15.15s \n" , persona.getNome(), persona.getCognome(), numeriGiocati, persona.won(), numeriIndovinati);
 	}
 
 	/**
@@ -50,22 +56,26 @@ public class PersonaUtils {
 	 * @param persone persone the persona array you want to print.
 	 */
 	public static void printPersonasResult(Persona[] persone) {
+		int nomeMaxSize = calculateSizeOfNomeField(persone, -1, (short) -1);
+		int cognomeMaxSize = calculateSizeOfCognomeField(persone, -1, (short) -1);
 		for(int i=0; i < persone.length; i++){
-			printPersonaResult(persone[i]);
+			printPersonaResult(persone[i], nomeMaxSize, cognomeMaxSize);
 		}
 	}
 	
 	/**
 	 * Print the persona statistics with jolly.
 	 * @param persona persone the persona array you want to print.
-	 * @param jolly the jolly value
+	 * @param jolly the jolly value.
+	 * @param nomeMaxSize The max size of the nome field.
+	 * @param cognomeMaxSize The max size of the cognome field.
 	 */
-	public static void printPersonaResultWithJolly(Persona persona, short jolly) {
+	public static void printPersonaResultWithJolly(Persona persona, short jolly, int nomeMaxSize, int cognomeMaxSize) {
 		String numeriGiocati;
 		String numeriIndovinati;
 		numeriGiocati = ArrayToString.shortArrayToString(persona.getNumeriGiocati());
 		numeriIndovinati = ArrayToString.shortArrayToString(persona.getNumeriIndovinati());
-		System.out.printf("%-15.15s %-15.15s %-" + spacesNum + "."+spacesNum+"s %-7.7b %-15.15s with jolly: [%-5d] \n" , persona.getNome(), persona.getCognome(), numeriGiocati, persona.won(), numeriIndovinati, jolly);
+		System.out.printf("%-" + nomeMaxSize + "." + nomeMaxSize + "s %-" + cognomeMaxSize + "." + cognomeMaxSize + "s %-" + spacesNum + "." + spacesNum + "s %-7.7b %-15.15s with jolly: [%-5d] \n" , persona.getNome(), persona.getCognome(), numeriGiocati, persona.won(), numeriIndovinati, jolly);
 	}
 
 	/**
@@ -75,9 +85,11 @@ public class PersonaUtils {
 	 */
 	public static void printPersonaWithNMatched(Persona[] persone, int number) {
 		boolean trovato = false;
+		int nomeMaxSize = calculateSizeOfNomeField(persone, number, (short) -1);
+		int cognomeMaxSize = calculateSizeOfCognomeField(persone, number, (short) -1);
 		for(int i=0; i < persone.length; i++){
 			if(persone[i].getNumeriIndovinati().size() == number){
-				printPersonaResult(persone[i]);
+				printPersonaResult(persone[i], nomeMaxSize, cognomeMaxSize);
 				trovato = true;
 			}
 		}
@@ -111,9 +123,11 @@ public class PersonaUtils {
 	public static void printPersonaWithNMatchedAndJolly(Persona[] persone, int number, short jolly) {
 		boolean trovato = false;
 		int numTrovati = 0;
+		int nomeMaxSize = calculateSizeOfNomeField(persone, number, jolly);
+		int cognomeMaxSize = calculateSizeOfCognomeField(persone, number, jolly);
 		for(int i=0; i < persone.length; i++){
 			if(persone[i].getNumeriIndovinati().size() == number && persone[i].getNumeriGiocati().contains(jolly)){
-				printPersonaResultWithJolly(persone[i], jolly);
+				printPersonaResultWithJolly(persone[i], jolly, nomeMaxSize, cognomeMaxSize);
 				trovato = true;
 				numTrovati++;
 			}
@@ -132,7 +146,7 @@ public class PersonaUtils {
 	 * @param jolly the jolly number
 	 * @return Return the number of Personas who matched number numbers and jolly.
 	 */
-	public static int numberPersonasWithNMatchedAndJolly(Persona[] persone, int number, short jolly){
+	public static int numberPersonasWithNMatchedAndJolly(Persona[] persone, int number, int jolly){
 		int conta = 0;
 		for(int i=0; i < persone.length; i++){
 			if(persone[i].getNumeriIndovinati().size() == number && persone[i].getNumeriGiocati().contains(jolly)){
@@ -141,7 +155,49 @@ public class PersonaUtils {
 		}
 		return conta;
 	}
+
+	/**
+	 * Calculate the max size of the nome field.
+	 * @param persone The array with the persone of which calculate the max nome size.
+	 * @param number number matched.
+	 * @param jolly The jolly number.
+	 * @return Returns the max of the nome field.
+	 */
+	private static int calculateSizeOfNomeField(Persona[] persone, int number, short jolly) {
+		int size = 1;
+		for (int i = 0; i < persone.length; i++) {
+			if((number == -1 || persone[i].getNumeriIndovinati().size() == number) &&
+				(jolly == -1 || persone[i].getNumeriGiocati().contains(jolly))){
+				int length = persone[i].getNome().length();
+				if (size < length) {
+					size = length;
+				}
+			}
+		}
+
+		return size;
+	}
 	
-	
+	/**
+	 * Calculate the max size of the cognome field.
+	 * @param persone The array with the persone of which calculate the max cognome size.
+	 * @param number number matched.
+	 * @param jolly The jolly number.
+	 * @return Returns the max of the cognome field.
+	 */
+	private static int calculateSizeOfCognomeField(Persona[] persone, int number, short jolly) {
+		int size = 1;
+		for (int i = 0; i < persone.length; i++) {
+			if((number == -1 || persone[i].getNumeriIndovinati().size() == number) &&
+				(jolly == -1 || persone[i].getNumeriGiocati().contains(jolly))){
+				int length = persone[i].getCognome().length();
+				if (size < length) {
+					size = length;
+				}
+			}
+		}
+
+		return size;
+	}
 
 }
