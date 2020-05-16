@@ -13,3 +13,8 @@ jdk:
   - openjdk13
   - openjdk14
   - openjdk15
+
+script:
+- mvn install
+- mvn test -B
+- mvn exec:java
