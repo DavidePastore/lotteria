@@ -15,6 +15,5 @@ jdk:
   - openjdk15
 
 script:
-- mvn install
 - mvn test -B
 - mvn exec:java
