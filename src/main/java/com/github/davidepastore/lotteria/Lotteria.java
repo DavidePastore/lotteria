@@ -30,7 +30,7 @@ public class Lotteria {
 	
 	/**
 	 * Set the jackpot.
-	 * @param montepremi
+	 * @param montepremi The jackpot to set.
 	 */
 	public void setMontepremi(long montepremi){
 		this.montepremi = montepremi;

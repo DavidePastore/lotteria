@@ -22,7 +22,7 @@ public class FileReader {
 	 * Read the content of the file and return an array of strings.
 	 * @param filename the filename
 	 * @return array of strings.
-	 * @throws IOException
+	 * @throws IOException If an error comes out while trying to read the file.
 	 */
 	public String[] readLines(String filename) throws IOException {
 		// Get the object of DataInputStream
