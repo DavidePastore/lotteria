@@ -1,7 +1,7 @@
 lotteria
 ========
 
-[![Build Status][ico-travis]][link-travis]
+[![Continuous Integration][ico-gh-actions]][link-gh-actions]
 
 Simulation of a lottery.
 
@@ -23,6 +23,6 @@ Launch the following command:
 
 
 
-[ico-travis]: https://travis-ci.org/DavidePastore/lotteria.svg?branch=master
+[ico-gh-actions]: https://github.com/DavidePastore/lotteria/actions/workflows/worflow.yml/badge.svg
 
-[link-travis]: https://travis-ci.org/DavidePastore/lotteria
+[link-gh-actions]: https://github.com/DavidePastore/lotteria/actions/workflows/worflow.yml
